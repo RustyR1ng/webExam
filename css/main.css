@@ -1,0 +1,68 @@
+@import url(/css/Intro.css);
+:root {
+  --background: #ffd480;
+  --accent: #e64d2e;
+  --text: #dfe7f4;
+  --text-accent: #fabe2c;
+  --main-font: "Intro", monospace;
+  --icon-font: "Font Awesome 5 Free", "Font Awesome 5 Brands";
+}
+
+body {
+  background-color: var(--background);
+  font-family: var(--main-font);
+}
+* {
+  outline: none !important;
+}
+.navbar {
+  background-color: var(--accent);
+}
+.animateNav {
+  transition: ease 0.35s;
+  -webkit-transition: ease 0.35s;
+}
+.animateModal {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+}
+.navbar * {
+  transition: 0.3s;
+  color: var(--text);
+  font-weight: 900;
+  font-size: 28px;
+  outline: none !important;
+}
+.navbar *:not(.active):hover {
+  color: var(--text-accent);
+}
+.navbar a.active {
+  pointer-events: none;
+  color: var(--text-accent);
+  position: relative;
+}
+.navbar .underline {
+  position: absolute;
+  background-color: var(--text-accent);
+  height: 3px;
+  width: 0;
+}
+
+.navbar-brand svg {
+  height: 50px;
+  width: 50px;
+}
+
+.navbar-toggler-icon::after {
+  display: block;
+  content: "\f105";
+  font-family: var(--icon-font);
+  font-weight: 900;
+  transform: rotate(90deg);
+}
+.nav-icon-clicked {
+  transform: rotate(180deg);
+}
+legend {
+  font-size: 1em;
+}

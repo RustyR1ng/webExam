@@ -1,0 +1,149 @@
+@font-face {
+  font-family: "Intro";
+  src: url("/fonts/Intro/Intro-Regular.eot");
+  src: url("/fonts/Intro/Intro-Regular.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Regular.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro Book";
+  src: url("/fonts/Intro/Intro-Book.eot");
+  src: url("/fonts/Intro/Intro-Book.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Book.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Book.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro";
+  src: url("/fonts/Intro/Intro-Thin.eot");
+  src: url("/fonts/Intro/Intro-Thin.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Thin.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro";
+  src: url("/fonts/Intro/Intro-Light.eot");
+  src: url("/fonts/Intro/Intro-Light.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Light.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro";
+  src: url("/fonts/Intro/Intro-Light-Italic.eot");
+  src: url("/fonts/Intro/Intro-Light-Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Light-Italic.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Light-Italic.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro";
+  src: url("/fonts/Intro/Intro-Bold-Italic.eot");
+  src: url("/fonts/Intro/Intro-Bold-Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Bold-Italic.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Bold-Italic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro Book";
+  src: url("/fonts/Intro/Intro-Book-Italic.eot");
+  src: url("/fonts/Intro/Intro-Book-Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Book-Italic.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Book-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro Regular";
+  src: url("/fonts/Intro/Intro-Regular-Italic.eot");
+  src: url("/fonts/Intro/Intro-Regular-Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Regular-Italic.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Regular-Italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro";
+  src: url("/fonts/Intro/Intro-Black.eot");
+  src: url("/fonts/Intro/Intro-Black.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Black.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro";
+  src: url("/fonts/Intro/Intro-Black-Italic.eot");
+  src: url("/fonts/Intro/Intro-Black-Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Black-Italic.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Black-Italic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro";
+  src: url("/fonts/Intro/Intro-Bold.eot");
+  src: url("/fonts/Intro/Intro-Bold.eot?#iefix") format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Bold.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro Black Inline";
+  src: url("/fonts/Intro/Intro-Black-Inline.eot");
+  src: url("/fonts/Intro/Intro-Black-Inline.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Black-Inline.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Black-Inline.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Intro";
+  src: url("/fonts/Intro/Intro-Thin-Italic.eot");
+  src: url("/fonts/Intro/Intro-Thin-Italic.eot?#iefix")
+      format("embedded-opentype"),
+    url("/fonts/Intro/Intro-Thin-Italic.woff2") format("woff2"),
+    url("/fonts/Intro/Intro-Thin-Italic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
