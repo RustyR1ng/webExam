@@ -40,6 +40,7 @@ body {
   pointer-events: none;
   color: var(--text-accent);
   position: relative;
+  pointer-events: none;
 }
 .navbar .underline {
   position: absolute;
@@ -65,4 +66,204 @@ body {
 }
 legend {
   font-size: 1em;
+}
+.modal-content {
+  background-color: var(--background);
+}
+.modal-header {
+  background-color: var(--accent);
+  color: var(--text);
+  border-color: var(--accent);
+}
+.modal-footer {
+  border-color: var(--background);
+}
+.modal-header button {
+  color: var(--text-accent);
+}
+.modal-header button:hover {
+  color: var(--text);
+}
+.error-toast div {
+  background-color: lightcoral;
+  border: none;
+  color: black;
+}
+.close span {
+  display: none;
+}
+.close::after {
+  content: "\f00d";
+  font-weight: 900;
+  font-family: var(--icon-font);
+  text-shadow: none;
+}
+
+.icon::after {
+  font-weight: 900;
+  font-family: var(--icon-font);
+  text-shadow: none;
+}
+
+.deleteRecordBtn::after {
+  content: "\f1f8";
+}
+.changeRecordBtn::after {
+  content: "\f013";
+}
+.companyList div.row:first-of-type {
+  background-color: var(--accent);
+  color: var(--text);
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+}
+
+@media (max-width: 768px) {
+  .companyList div.row:first-of-type {
+    border-radius: 0;
+  }
+}
+.companyList div.row {
+  background-color: var(--text);
+}
+.companyList div.row:first-of-type div {
+  text-align: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.companyList div.row div:not(:last-of-type) {
+  border-right: 2px solid var(--text-accent);
+}
+.btn {
+  border-radius: 9999px;
+  color: white;
+}
+
+button:not(.icon) {
+  background-color: var(--accent) !important;
+  border-color: transparent !important;
+}
+
+.slider .carousel-item {
+  transition: 3s;
+  widows: 100%;
+  height: 100%;
+}
+.carousel-item img {
+  width: 50%;
+  min-width: 300px;
+  bottom: 5%;
+  left: 50%;
+  margin: 0 !important;
+  transform: translate(-50%, 45%);
+}
+.slider .carousel-inner {
+  height: 400px;
+  background: url(/img/slider-background.jpeg) center no-repeat;
+  background-size: cover;
+}
+@media (max-width: 450px) {
+  .carousel-item img {
+    height: 60%;
+    bottom: 50%;
+    min-width: 0;
+    width: auto;
+    left: 50%;
+    margin: 0 !important;
+    transform: translate(-50%, 50%);
+  }
+  div.container-fluid.level
+    div.row:nth-of-type(2)
+    div.col-md:nth-of-type(even)::after,
+  div.container-fluid.level
+    div.row:nth-of-type(2)
+    div.col-md:nth-of-type(even)::before {
+    content: "";
+    display: block;
+    width: 80%;
+    height: 2px;
+    border-radius: 9999px;
+    background-color: var(--accent);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  div.container-fluid.level
+    div.row:nth-of-type(2)
+    div.col-md:nth-of-type(even)::before {
+    top: 0;
+  }
+  div.container-fluid.level
+    div.row:nth-of-type(2)
+    div.col-md:nth-of-type(even)::after {
+    bottom: 0;
+  }
+}
+div.container-fluid.level div.row:nth-of-type(2) div.col-md:nth-of-type(2) {
+  border-left: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+  position: relative;
+}
+div.level div.row:first-of-type,
+div.chooseBiz div.row:first-of-type,
+div.menuSet div.row:first-of-type {
+  color: var(--text-accent);
+  background-color: var(--accent);
+}
+div.level h1 {
+  font-size: 4em;
+}
+div.level h2 {
+  font-weight: 800;
+  font-size: 1.5em;
+}
+div.level p {
+  font-size: 1.4em;
+}
+h1 {
+  font-size: 2em !important;
+}
+.card button {
+  border-radius: 10px;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
+.card {
+  border-radius: 999px 999px 100px 100px;
+  background-color: var(--text);
+}
+.dopOp {
+  background-color: var(--accent);
+  color: var(--text);
+}
+.dopOp form {
+  font-size: 1.2em;
+}
+h3 {
+  font-size: 1.7em;
+}
+.dopOp form input[type="checkbox"] {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: scale(2) translate(0, -25%);
+}
+.dopOp form input[type="number"] {
+  font-size: 2em;
+  color: var(--text-accent);
+}
+.github::after {
+  content: "\f09b";
+  color: var(--text-accent);
+  font-size: 70px;
+}
+#report {
+  border-top: 3px solid var(--text-accent);
+  background-color: var(--accent);
+}
+.icon:hover {
+  text-decoration: none;
 }
