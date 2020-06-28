@@ -1,9 +1,16 @@
 @import url(/css/Intro.css);
 :root {
-  --background: #ffd480;
+  /*  --background: #ffd480;
   --accent: #e64d2e;
   --text: #dfe7f4;
-  --text-accent: #fabe2c;
+  --text-accent: #fabe2c; */
+  --background: #fff;
+  --accent: #f7c040;
+  --text: #000;
+  --text-accent: #333;
+  --accentG: #c1e092;
+  --accentK: #ebcd9b;
+  --accentR: #e64d2e;
   --main-font: "Intro", monospace;
   --icon-font: "Font Awesome 5 Free", "Font Awesome 5 Brands";
 }
@@ -16,7 +23,7 @@ body {
   outline: none !important;
 }
 .navbar {
-  background-color: var(--accent);
+  background-color: var(--accentR);
 }
 .animateNav {
   transition: ease 0.35s;
@@ -28,23 +35,23 @@ body {
 }
 .navbar * {
   transition: 0.3s;
-  color: var(--text);
+  color: var(--background);
   font-weight: 900;
   font-size: 28px;
   outline: none !important;
 }
 .navbar *:not(.active):hover {
-  color: var(--text-accent);
+  color: var(--accent);
 }
 .navbar a.active {
   pointer-events: none;
-  color: var(--text-accent);
+  color: var(--accent);
   position: relative;
   pointer-events: none;
 }
 .navbar .underline {
   position: absolute;
-  background-color: var(--text-accent);
+  background-color: var(--accent);
   height: 3px;
   width: 0;
 }
@@ -60,6 +67,7 @@ body {
   font-family: var(--icon-font);
   font-weight: 900;
   transform: rotate(90deg);
+  color: var(--accent);
 }
 .nav-icon-clicked {
   transform: rotate(180deg);
@@ -85,9 +93,9 @@ legend {
   color: var(--text);
 }
 .error-toast div {
-  background-color: lightcoral;
+  background-color: var(--accentR);
   border: none;
-  color: black;
+  color: var(--text);
 }
 .close span {
   display: none;
@@ -124,7 +132,7 @@ legend {
   }
 }
 .companyList div.row {
-  background-color: var(--text);
+  background-color: var(--background);
 }
 .companyList div.row:first-of-type div {
   text-align: center;
@@ -135,14 +143,22 @@ legend {
 .companyList div.row div:not(:last-of-type) {
   border-right: 2px solid var(--text-accent);
 }
-.btn {
-  border-radius: 9999px;
-  color: white;
+button {
+  color: var(--text);
+  transition: 0.2s;
+  padding: 5px;
+}
+button:not(.navbar-toggler):not(.close):hover {
+  background-color: var(--accentG);
 }
 
-button:not(.icon) {
-  background-color: var(--accent) !important;
+button:not(.navbar-toggler):not(.close) {
+  border-radius: 9999px;
+  background-color: var(--accent);
   border-color: transparent !important;
+}
+button.dangerBtn {
+  background-color: var(--accentR) !important;
 }
 
 .slider .carousel-item {
@@ -225,17 +241,22 @@ h1 {
   font-size: 2em !important;
 }
 .card button {
-  border-radius: 10px;
+  border-radius: 10px !important;
   padding: 0;
   width: 30px;
   height: 30px;
 }
 .card {
   border-radius: 999px 999px 100px 100px;
-  background-color: var(--text);
+  background-color: var(--accentK);
+  border-color: transparent;
+
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow: 20px 20px 40px #d9d9d9, -20px -20px 40px #ffffff;
 }
+
 .dopOp {
-  background-color: var(--accent);
+  background-color: var(--accentK);
   color: var(--text);
 }
 .dopOp form {
@@ -243,6 +264,7 @@ h1 {
 }
 h3 {
   font-size: 1.7em;
+  color: var(--text-accent);
 }
 .dopOp form input[type="checkbox"] {
   margin: 0;
@@ -253,17 +275,22 @@ h3 {
 }
 .dopOp form input[type="number"] {
   font-size: 2em;
-  color: var(--text-accent);
+  color: var(--accentR);
 }
 .github::after {
   content: "\f09b";
-  color: var(--text-accent);
+  color: var(--accent);
   font-size: 70px;
 }
 #report {
-  border-top: 3px solid var(--text-accent);
-  background-color: var(--accent);
+  /* border-top: 3px solid var(--accentG); */
+  background-color: var(--accentR);
+  color: var(--text);
 }
 .icon:hover {
   text-decoration: none;
+}
+.search > .row:first-of-type {
+  background-color: var(--accent);
+  color: var(--text-accent);
 }

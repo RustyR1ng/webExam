@@ -1,20 +1,28 @@
 let host = "http://exam-2020-1-api.std-400.ist.mospolytech.ru";
 let recordsPath = "/api/data1";
 let recordsList = document.getElementById("records");
-let recordsRows = recordsList.querySelectorAll("div.row:not(:first-of-type)");
+let recordsRows = recordsList.getElementsByClassName("record");
 let recordsNode;
 
 function sendRequest(url, method, onloadHandler, params) {
   let xhr = new XMLHttpRequest();
+  xhr.upload.onerror = onerrorHandler;
+  xhr.upload.onabort = onerrorHandler;
+  xhr.upload.ontimeout = onerrorHandler;
   xhr.onerror = onerrorHandler;
   xhr.onabort = onerrorHandler;
   xhr.ontimeout = onerrorHandler;
   xhr.onload = onloadHandler;
   xhr.open(method, url);
+  /* xhr.setRequestHeader("Access-Control-Allow-Origin", "true"); */
   /* xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Accept", "application/json"); */
   xhr.responseType = "json";
-  xhr.send(params);
+  if (params) {
+    xhr.send(params);
+  } else {
+    xhr.send();
+  }
 }
 
 function recordPath(id) {
@@ -71,7 +79,7 @@ function fillForm(form, id) {
 
 function renderRecord(record) {
   function renderRecordName(row, col) {
-    row.classList.add("row", "py-2");
+    row.classList.add("row", "record", "py-2");
     col.classList.add("col");
     row.id = record.id;
     col.innerHTML = record.name;
@@ -103,8 +111,7 @@ function renderRecord(record) {
     );
     btn.dataset.recordId = record.id;
     btn.classList.add(
-      "btn",
-      "btn-danger",
+      "dangerBtn",
       "deleteRecordBtn",
       "icon",
       "mr-md-1",
@@ -123,7 +130,7 @@ function renderRecord(record) {
 
     btn = document.createElement("button");
     btn.dataset.recordId = record.id;
-    btn.classList.add("btn", "btn-secondary", "changeRecordBtn", "icon");
+    btn.classList.add("changeRecordBtn", "icon");
     btn.setAttribute("data-toggle", "modal");
     btn.setAttribute("data-target", "#createUpdModal");
     btn.dataset.recordId = record.id;
@@ -164,12 +171,11 @@ function renderRecords(records) {
 document.getElementById("downloandDataBtn").onclick = function () {
   let url = new URL(recordsPath, host);
   sendRequest(url, "GET", function () {
-    recordsRows.forEach((element) => element.remove());
+    Array.from(recordsRows).forEach((element) => {
+      element.remove();
+    });
     renderRecords(this.response);
     recordsNode = this.response;
-    recordsRows.forEach((element) => {
-      element.classList.add("d-none");
-    });
   });
 };
 //create
@@ -200,21 +206,27 @@ function deleteBtnHandler(event) {
 }
 //update
 function updateBtnHandler(event) {
-  let params = new FormData();
   let id = event.target.dataset.recordId;
+  let url = new URL(recordPath(id), host);
   let thisRecord = recordsNode.find((item) => item.id == id);
   document
     .querySelector("#createUpdModal form")
-    .querySelectorAll("input:not([type=radio]), textarea")
+    .querySelectorAll("input, textarea")
     .forEach((element) => {
       let prop = element.getAttribute("name");
-      if (thisRecord[prop] != element.value) {
-        params.append(prop, element.value);
+      switch (element.type) {
+        case "radio": {
+          if (!element.checked) break;
+        }
+        default: {
+          if (thisRecord[prop] != element.value) {
+            url.searchParams.set(prop, element.value);
+          }
+        }
       }
     });
-  let url = new URL(recordPath(id), host);
 
-  sendRequest(url, "PUT", null, params);
+  sendRequest(url, "PUT", renderRecord(id), null);
 }
 function onerrorHandler() {
   $("#error").toast("show");
