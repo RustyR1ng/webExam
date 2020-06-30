@@ -46,14 +46,25 @@ body {
 .navbar a.active {
   pointer-events: none;
   color: var(--accent);
-  position: relative;
+
   pointer-events: none;
 }
-.navbar .underline {
-  position: absolute;
+.navbar a {
+  position: relative;
+}
+.navbar a::after {
   background-color: var(--accent);
-  height: 3px;
-  width: 0;
+  display: block;
+  content: "";
+  height: 2px;
+  width: 0%;
+  left: 50%;
+  position: absolute;
+  transition: width 0.6s ease-in-out;
+  transform: translateX(-50%);
+}
+.navbar a.active::after {
+  width: 100%;
 }
 
 .navbar-brand svg {

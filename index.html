@@ -52,25 +52,28 @@
         class="collapse animateNav navbar-collapse justify-content-center"
         id="navbarSupportedContent"
       >
-        <ul class="navbar-nav">
-          <li class="nav-item d-flex justify-content-center">
-            <a class="nav-link active d-inline" href="#"
+        <ul
+          class="navbar-nav d-flex justify-content-center align-items-xl-center"
+        >
+          <li class="nav-item">
+            <a class="nav-link active d-inline-block" href="#"
               >Главная <span class="sr-only">(current)</span></a
             >
           </li>
-          <li class="nav-item d-flex justify-content-center">
-            <a class="nav-link d-inline" href="#choose">Выбор предприятия</a>
+          <li class="nav-item">
+            <a class="nav-link d-inline-block" href="#choose"
+              >Выбор предприятия</a
+            >
           </li>
-          <li class="nav-item d-flex justify-content-center">
-            <a class="nav-link d-inline" href="#menu">Меню</a>
+          <li class="nav-item">
+            <a class="nav-link d-inline-block" href="#menu">Меню</a>
           </li>
-          <li class="nav-item d-flex justify-content-center">
-            <a class="nav-link d-inline" href="#report">Обратная связь</a>
+          <li class="nav-item">
+            <a class="nav-link d-inline-block" href="#report">Обратная связь</a>
           </li>
-          <li class="nav-item d-flex justify-content-center">
-            <a class="nav-link d-inline" href="admin-panel.html">Admin panel</a>
+          <li class="nav-item">
+            <a class="nav-link d-inline-block" href="admin.html">Админ</a>
           </li>
-          <div class="underline"></div>
         </ul>
       </div>
     </nav>
@@ -181,25 +184,39 @@
           <form class="px-md-3 my-4" id="searchBiz">
             <div class="form-row">
               <div class="col-md mt-3 pr-md-3 text-center">
-                <label for="">Административный округ</label>
-                <input class="form-control" type="text" />
+                <label for="admAreaSearch">Административный округ</label>
+                <select name="admArea" id="admAreaSearch" class="form-control"
+                  ><option selected>Не выбрано</option>
+                </select>
               </div>
               <div class="col-md mt-3 text-center">
-                <label for="">Район</label>
-                <input class="form-control" type="text" />
+                <label for="districtSearch">Район</label>
+                <select name="district" id="districtSearch" class="form-control"
+                  ><option selected>Не выбрано</option>
+                </select>
               </div>
             </div>
             <div class="form-row mt-3">
               <div class="col-6 col-md-3 pr-md-3">
-                <label for="">Тип</label>
-                <select class="form-control" name="" id="">
-                  <option value="">Не выбрано</option>
+                <label for="typeObjectSearch">Тип</label>
+                <select
+                  class="form-control"
+                  name="typeObject"
+                  id="typeObjectSearch"
+                >
+                  <option selected>Не выбрано</option>
                 </select>
               </div>
               <div class="col-6 col-md-3 pr-md-3">
-                <label for="">Соц. скидки</label>
-                <select class="form-control" name="" id="">
-                  <option value="">Не выбрано</option>
+                <label for="socialPrivilegeSearch">Соц. скидки</label>
+                <select
+                  class="form-control"
+                  name="socialPrivilege"
+                  id="socialPrivilegeSearch"
+                >
+                  <option selected>Не выбрано</option>
+                  <option>Да</option>
+                  <option>Нет</option>
                 </select>
               </div>
               <div class="col-md text-md-right text-center mt-3 mt-md-auto">
@@ -216,20 +233,13 @@
           <thead>
             <tr>
               <th class="text-center" scope="col">Название</th>
-              <th class="text-center" scope="col">Тип</th>
+              <th class="text-center d-none d-md-table-cell" scope="col">
+                Тип
+              </th>
               <th class="w-75 text-center" scope="col">Адрес</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td class="w-75">
-                <p class="d-inline-block m-0">@mdo</p>
-                <span>choose</span>
-              </td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
       </div>
       <div id="menu" class="container-fluid menuSet">
@@ -255,9 +265,9 @@
                   <div class="form-row d-flex justify-content-center">
                     <button type="button">-</button>
                     <input
-                      class="form-control w-25 text-center form-control-sm mx-2"
-                      type="number"
-                      min="0"
+                      class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                      type="text"
+                      value="0"
                     /><button type="button">
                       +
                     </button>
@@ -282,9 +292,9 @@
                   <div class="form-row d-flex justify-content-center">
                     <button type="button">-</button>
                     <input
-                      class="form-control w-25 text-center form-control-sm mx-2"
-                      type="number"
-                      min="0"
+                      class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                      type="text"
+                      value="0"
                     /><button type="button">
                       +
                     </button>
@@ -309,8 +319,9 @@
                   <div class="form-row d-flex justify-content-center">
                     <button type="button">-</button>
                     <input
-                      class="form-control w-25 text-center form-control-sm mx-2"
-                      type="number"
+                      class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                      type="text"
+                      value="0"
                       min="0"
                     /><button type="button">
                       +

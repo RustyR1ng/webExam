@@ -2,7 +2,7 @@ let host = "http://exam-2020-1-api.std-400.ist.mospolytech.ru";
 let recordsPath = "/api/data1";
 let recordsList = document.getElementById("records");
 let recordsRows = recordsList.getElementsByClassName("record");
-let recordsNode;
+let recordsArr;
 
 function sendRequest(url, method, onloadHandler, params) {
   let xhr = new XMLHttpRequest();
@@ -41,7 +41,7 @@ function resetForm(form) {
 }
 
 function fillForm(form, id) {
-  let formRecord = recordsNode.find((item) => item.id == id);
+  let formRecord = recordsArr.find((item) => item.id == id);
   form.querySelectorAll("input, textarea").forEach((element) => {
     let property = element.getAttribute("name");
     if (formRecord[property] != null) {
@@ -168,14 +168,14 @@ function renderRecords(records) {
 }
 
 //read
-document.getElementById("downloandDataBtn").onclick = function () {
+document.getElementById("filterBtn").onclick = function () {
   let url = new URL(recordsPath, host);
   sendRequest(url, "GET", function () {
     Array.from(recordsRows).forEach((element) => {
       element.remove();
     });
-    renderRecords(this.response);
-    recordsNode = this.response;
+    recordsArr = Array.prototype.slice.call(this.response);
+    renderRecords(recordsArr.slice(0, 5));
   });
 };
 //create
@@ -208,7 +208,7 @@ function deleteBtnHandler(event) {
 function updateBtnHandler(event) {
   let id = event.target.dataset.recordId;
   let url = new URL(recordPath(id), host);
-  let thisRecord = recordsNode.find((item) => item.id == id);
+  let thisRecord = recordsArr.find((item) => item.id == id);
   document
     .querySelector("#createUpdModal form")
     .querySelectorAll("input, textarea")
