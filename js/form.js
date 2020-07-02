@@ -12,7 +12,7 @@ window.onload = function () {
     loader.fadeOut();
     preloader.fadeOut("slow");
     $("body").css("overflow", "auto");
-  }, 2000);
+  }, 1000);
 
   mainBody.style.marginTop = header.offsetHeight + "px";
 };

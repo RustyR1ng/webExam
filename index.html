@@ -15,6 +15,7 @@
     <script src="js/bootstrap.bundle.min.js" defer></script>
     <script src="js/form.js" defer></script>
     <script src="js/client.js" defer></script>
+    <script src="js/sets.json" defer></script>
     <title>FoodHub</title>
   </head>
   <body>
@@ -99,7 +100,7 @@
               <div class="img-container position-relative w-100 h-100">
                 <img
                   class="d-block position-absolute"
-                  src="/img/dish1.png"
+                  src="img/dish1.png"
                   alt="Первый слайд"
                 />
               </div>
@@ -108,7 +109,7 @@
               <div class="img-container position-relative w-100 h-100">
                 <img
                   class="d-block position-absolute"
-                  src="/img/dish2.png"
+                  src="img/dish2.png"
                   alt="Второй слайд"
                 />
               </div>
@@ -117,7 +118,7 @@
               <div class="img-container position-relative w-100 h-100">
                 <img
                   class="d-block position-absolute"
-                  src="/img/dish3.png"
+                  src="img/dish3.png"
                   alt="Третий слайд"
                 />
               </div>
@@ -211,7 +212,7 @@
                 <label for="socialPrivilegeSearch">Соц. скидки</label>
                 <select
                   class="form-control"
-                  name="socialPrivilege"
+                  name="socialPrivileges"
                   id="socialPrivilegeSearch"
                 >
                   <option selected>Не выбрано</option>
@@ -248,87 +249,277 @@
             <h1 class="text-center">Меню</h1>
           </div>
         </div>
-        <div class="row py-5">
-          <div class="col-md d-flex justify-content-center align-items-center">
-            <div class="card my-4 mx-md-3">
-              <img
-                class="card-img-top"
-                src="/img/dish1.png"
-                alt="Card image cap"
-              />
-              <div
-                class="card-body d-flex justify-content-center align-items-center flex-column"
-              >
-                <h5 class="card-title">Название</h5>
-                <p class="card-text">Краткое описание</p>
-                <section class="sumSet">
-                  <div class="form-row d-flex justify-content-center">
-                    <button type="button">-</button>
-                    <input
-                      class="form-control-plaintext w-25 text-center form-control-sm mx-2"
-                      type="text"
-                      value="0"
-                    /><button type="button">
-                      +
-                    </button>
-                  </div>
-                </section>
-              </div>
+        <div
+          class="sets d-flex justify-content-center align-content-center flex-wrap"
+        >
+          <div class="card my-4 mx-md-3">
+            <img
+              class="card-img-top"
+              src="img/dish1.png"
+              alt="Card image cap"
+            />
+            <div
+              class="card-body d-flex justify-content-center align-items-center flex-column"
+            >
+              <h5 class="card-title text-center">Название</h5>
+              <p class="card-text text-center">Краткое описание</p>
+
+              <section class="sumSet mt-auto">
+                <span class="card-price d-block text-center">100$</span>
+                <div class="form-row d-flex justify-content-center">
+                  <button type="button">-</button>
+                  <input
+                    class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                    type="text"
+                    value="0"
+                  /><button type="button">
+                    +
+                  </button>
+                </div>
+              </section>
             </div>
           </div>
-          <div class="col-md d-flex justify-content-center align-items-center">
-            <div class="card my-4 mx-md-3">
-              <img
-                class="card-img-top"
-                src="/img/dish1.png"
-                alt="Card image cap"
-              />
-              <div
-                class="card-body d-flex justify-content-center align-items-center flex-column"
-              >
-                <h5 class="card-title">Название</h5>
-                <p class="card-text">Краткое описание</p>
-                <section class="sumSet">
-                  <div class="form-row d-flex justify-content-center">
-                    <button type="button">-</button>
-                    <input
-                      class="form-control-plaintext w-25 text-center form-control-sm mx-2"
-                      type="text"
-                      value="0"
-                    /><button type="button">
-                      +
-                    </button>
-                  </div>
-                </section>
-              </div>
+          <div class="card my-4 mx-md-3">
+            <img
+              class="card-img-top"
+              src="img/dish1.png"
+              alt="Card image cap"
+            />
+            <div
+              class="card-body d-flex justify-content-center align-items-center flex-column"
+            >
+              <h5 class="card-title text-center">Название</h5>
+              <p class="card-text text-center">Краткое описание</p>
+
+              <section class="sumSet mt-auto">
+                <span class="card-price d-block text-center">100$</span>
+                <div class="form-row d-flex justify-content-center">
+                  <button type="button">-</button>
+                  <input
+                    class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                    type="text"
+                    value="0"
+                  /><button type="button">
+                    +
+                  </button>
+                </div>
+              </section>
             </div>
           </div>
-          <div class="col-md d-flex justify-content-center align-items-center">
-            <div class="card my-4 mx-md-3">
-              <img
-                class="card-img-top"
-                src="/img/dish1.png"
-                alt="Card image cap"
-              />
-              <div
-                class="card-body d-flex justify-content-center align-items-center flex-column"
-              >
-                <h5 class="card-title">Название</h5>
-                <p class="card-text">Краткое описание</p>
-                <section class="sumSet">
-                  <div class="form-row d-flex justify-content-center">
-                    <button type="button">-</button>
-                    <input
-                      class="form-control-plaintext w-25 text-center form-control-sm mx-2"
-                      type="text"
-                      value="0"
-                      min="0"
-                    /><button type="button">
-                      +
-                    </button>
-                  </div>
-                </section>
-              </div>
+          <div class="card my-4 mx-md-3">
+            <img
+              class="card-img-top"
+              src="img/dish1.png"
+              alt="Card image cap"
+            />
+            <div
+              class="card-body d-flex justify-content-center align-items-center flex-column"
+            >
+              <h5 class="card-title text-center">Название</h5>
+              <p class="card-text text-center">Краткое описание</p>
+
+              <section class="sumSet mt-auto">
+                <span class="card-price d-block text-center">100$</span>
+                <div class="form-row d-flex justify-content-center">
+                  <button type="button">-</button>
+                  <input
+                    class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                    type="text"
+                    value="0"
+                  /><button type="button">
+                    +
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="card my-4 mx-md-3">
+            <img
+              class="card-img-top"
+              src="img/dish1.png"
+              alt="Card image cap"
+            />
+            <div
+              class="card-body d-flex justify-content-center align-items-center flex-column"
+            >
+              <h5 class="card-title text-center">Название</h5>
+              <p class="card-text text-center">Краткое описание</p>
+
+              <section class="sumSet mt-auto">
+                <span class="card-price d-block text-center">100$</span>
+                <div class="form-row d-flex justify-content-center">
+                  <button type="button">-</button>
+                  <input
+                    class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                    type="text"
+                    value="0"
+                  /><button type="button">
+                    +
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="card my-4 mx-md-3">
+            <img
+              class="card-img-top"
+              src="img/dish1.png"
+              alt="Card image cap"
+            />
+            <div
+              class="card-body d-flex justify-content-center align-items-center flex-column"
+            >
+              <h5 class="card-title text-center">Название</h5>
+              <p class="card-text text-center">Краткое описание</p>
+
+              <section class="sumSet mt-auto">
+                <span class="card-price d-block text-center">100$</span>
+                <div class="form-row d-flex justify-content-center">
+                  <button type="button">-</button>
+                  <input
+                    class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                    type="text"
+                    value="0"
+                  /><button type="button">
+                    +
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="card my-4 mx-md-3">
+            <img
+              class="card-img-top"
+              src="img/dish1.png"
+              alt="Card image cap"
+            />
+            <div
+              class="card-body d-flex justify-content-center align-items-center flex-column"
+            >
+              <h5 class="card-title text-center">Название</h5>
+              <p class="card-text text-center">Краткое описание</p>
+
+              <section class="sumSet mt-auto">
+                <span class="card-price d-block text-center">100$</span>
+                <div class="form-row d-flex justify-content-center">
+                  <button type="button">-</button>
+                  <input
+                    class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                    type="text"
+                    value="0"
+                  /><button type="button">
+                    +
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="card my-4 mx-md-3">
+            <img
+              class="card-img-top"
+              src="img/dish1.png"
+              alt="Card image cap"
+            />
+            <div
+              class="card-body d-flex justify-content-center align-items-center flex-column"
+            >
+              <h5 class="card-title text-center">Название</h5>
+              <p class="card-text text-center">Краткое описание</p>
+
+              <section class="sumSet mt-auto">
+                <span class="card-price d-block text-center">100$</span>
+                <div class="form-row d-flex justify-content-center">
+                  <button type="button">-</button>
+                  <input
+                    class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                    type="text"
+                    value="0"
+                  /><button type="button">
+                    +
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="card my-4 mx-md-3">
+            <img
+              class="card-img-top"
+              src="img/dish1.png"
+              alt="Card image cap"
+            />
+            <div
+              class="card-body d-flex justify-content-center align-items-center flex-column"
+            >
+              <h5 class="card-title text-center">Название</h5>
+              <p class="card-text text-center">Краткое описание</p>
+
+              <section class="sumSet mt-auto">
+                <span class="card-price d-block text-center">100$</span>
+                <div class="form-row d-flex justify-content-center">
+                  <button type="button">-</button>
+                  <input
+                    class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                    type="text"
+                    value="0"
+                  /><button type="button">
+                    +
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="card my-4 mx-md-3">
+            <img
+              class="card-img-top"
+              src="img/dish1.png"
+              alt="Card image cap"
+            />
+            <div
+              class="card-body d-flex justify-content-center align-items-center flex-column"
+            >
+              <h5 class="card-title text-center">Название</h5>
+              <p class="card-text text-center">Краткое описание</p>
+
+              <section class="sumSet mt-auto">
+                <span class="card-price d-block text-center">100$</span>
+                <div class="form-row d-flex justify-content-center">
+                  <button type="button">-</button>
+                  <input
+                    class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                    type="text"
+                    value="0"
+                  /><button type="button">
+                    +
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="card my-4 mx-md-3">
+            <img
+              class="card-img-top"
+              src="img/dish1.png"
+              alt="Card image cap"
+            />
+            <div
+              class="card-body d-flex justify-content-center align-items-center flex-column"
+            >
+              <h5 class="card-title text-center">Название</h5>
+              <p class="card-text text-center">Краткое описание</p>
+
+              <section class="sumSet mt-auto">
+                <span class="card-price d-block text-center">100$</span>
+                <div class="form-row d-flex justify-content-center">
+                  <button type="button">-</button>
+                  <input
+                    class="form-control-plaintext w-25 text-center form-control-sm mx-2"
+                    type="text"
+                    value="0"
+                  /><button type="button">
+                    +
+                  </button>
+                </div>
+              </section>
             </div>
           </div>
         </div>

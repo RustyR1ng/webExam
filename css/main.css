@@ -1,4 +1,4 @@
-@import url(/css/Intro.css);
+@import url(Intro.css);
 :root {
   /*  --background: #ffd480;
   --accent: #e64d2e;
@@ -264,6 +264,10 @@ h1 {
 
   background: linear-gradient(145deg, #e6e6e6, #ffffff);
   box-shadow: 20px 20px 40px #d9d9d9, -20px -20px 40px #ffffff;
+  flex: 300px 0 1;
+}
+.card span {
+  color: var(--accentR);
 }
 
 .dopOp {
@@ -304,4 +308,14 @@ h3 {
 .search > .row:first-of-type {
   background-color: var(--accent);
   color: var(--text-accent);
+}
+tbody tr {
+  cursor: pointer;
+}
+tbody tr:hover {
+  background-color: var(--accentK) !important;
+}
+select {
+  background-color: var(--accentG) !important;
+  color: var(--text) !important;
 }
