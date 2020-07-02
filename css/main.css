@@ -187,7 +187,7 @@ button.dangerBtn {
 }
 .slider .carousel-inner {
   height: 400px;
-  background: url(/img/slider-background.jpeg) center no-repeat;
+  background: url(../img/slider-background.jpeg) center no-repeat;
   background-size: cover;
 }
 @media (max-width: 450px) {
