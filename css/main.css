@@ -288,7 +288,7 @@ h3 {
   right: 10px;
   transform: scale(2) translate(0, -25%);
 }
-.dopOp form input[type="number"] {
+.dopOp form input.primarySum {
   font-size: 2em;
   color: var(--accentR);
 }

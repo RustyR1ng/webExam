@@ -5,6 +5,9 @@ let table20 = document.getElementById("20").getElementsByTagName("tbody");
 let menuCards = document.getElementsByClassName("card");
 let searchForm = document.getElementById("searchBiz");
 let sets = [];
+let chosenObj;
+let primarySum = 0;
+let primarySumElements = document.getElementsByClassName("primarySum");
 
 function sendRequest(url, method, onloadHandler, params) {
   let xhr = new XMLHttpRequest();
@@ -31,17 +34,25 @@ function fillSets() {
     (row) =>
       (row.onclick = function () {
         sets = [];
-        let record = recordsArr.find((item) => item.id == row.id);
-        for (let s = 1; s < 11; s++)
-          sets.push({ name: "set_" + s, price: record["set_" + s] });
+        chosenObj = recordsArr.find((item) => item.id == row.id);
+        for (let s = 1; s < 11; s++) {
+          let cardAmount = menuCards[s - 1].querySelector("input");
+          cardAmount.value = 0;
+          sets.push({
+            name: "set_" + s,
+            price: chosenObj["set_" + s],
+            amount: parseInt(cardAmount.value),
+          });
+        }
         fillPrices();
+        calcPrimary();
       })
   );
 }
 function fillPrices() {
   for (let cardID = 0; cardID < menuCards.length; cardID++) {
     let cardPrice = menuCards[cardID].querySelector("span");
-    cardPrice.innerText = sets[cardID].price;
+    cardPrice.innerText = sets[cardID].price + "$";
   }
 }
 function recordPath(id) {
@@ -93,9 +104,9 @@ function searchObjects() {
     });
 
   for (option of searchOptions) {
-    recordsRate = recordsRate.filter(
-      (item) => item[option.name] == option.value
-    );
+    recordsRate = recordsRate.filter((item) => {
+      return item[option.name] == option.value;
+    });
   }
   renderRecords(recordsRate.slice(0, 20));
   fillSets();
@@ -144,6 +155,8 @@ function fillCard(menuCards, cardID, responseJSON) {
         button.onclick = function () {
           if (input.value != 0) {
             input.value--;
+            sets[cardID].amount = parseInt(input.value);
+            calcPrimary();
           }
         };
         break;
@@ -151,21 +164,28 @@ function fillCard(menuCards, cardID, responseJSON) {
       case "+": {
         button.onclick = function () {
           input.value++;
+          sets[cardID].amount = parseInt(input.value);
+          calcPrimary();
         };
       }
     }
   });
   input.onchange = function () {
-    if (input.value == "") {
-      input.value = 0;
-      return;
+    if (input.value == "") input.value = 0;
+    else {
+      input.value = input.value.replace(/\D/g, "");
+      if (!Number.isInteger(input.value)) input.value = parseInt(input.value);
     }
-    input.value = input.value.replace(/\D/g, "");
-    if (!Number.isInteger(input.value)) input.value = parseInt(input.value);
+    if (isNaN(input.value)) input.value = 0;
+    else {
+      sets[cardID].amount = parseInt(input.value);
+      calcPrimary();
+    }
   };
   let cardName = menuCards[cardID].querySelector(".card-title");
   let cardDescription = menuCards[cardID].querySelector(".card-text");
   let cardImage = menuCards[cardID].querySelector("img");
+
   cardName.innerText = responseJSON[cardID].name;
   cardDescription.innerText = responseJSON[cardID].descripton;
   cardImage.setAttribute("src", responseJSON[cardID].image);
@@ -177,3 +197,10 @@ function fillCard(menuCards, cardID, responseJSON) {
     fillCard(menuCards, cardID, responseJSON);
   }
 })();
+
+function calcPrimary() {
+  let sum = 0;
+  for (item of sets) sum += item.price * item.amount;
+  primarySum = sum;
+  for (elem of primarySumElements) elem.value = primarySum + "$";
+}
