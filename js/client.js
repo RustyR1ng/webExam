@@ -7,6 +7,7 @@ let searchForm = document.getElementById("searchBiz");
 let sets = [];
 let chosenObj;
 let primarySum = 0;
+let setsContainer = $(".sets");
 let primarySumElements = document.getElementsByClassName("primarySum");
 
 function sendRequest(url, method, onloadHandler, params) {
@@ -37,15 +38,18 @@ function fillSets() {
         chosenObj = recordsArr.find((item) => item.id == row.id);
         for (let s = 1; s < 11; s++) {
           let cardAmount = menuCards[s - 1].querySelector("input");
-          cardAmount.value = 0;
           sets.push({
             name: "set_" + s,
             price: chosenObj["set_" + s],
             amount: parseInt(cardAmount.value),
           });
         }
+
+        if (setsContainer.hasClass("d-none"))
+          setsContainer.toggleClass("d-flex d-none");
         fillPrices();
         calcPrimary();
+        activeRow(row);
       })
   );
 }
@@ -196,6 +200,7 @@ function fillCard(menuCards, cardID, responseJSON) {
   for (let cardID = 0; cardID < menuCards.length; cardID++) {
     fillCard(menuCards, cardID, responseJSON);
   }
+  setsContainer.toggleClass("d-none d-flex");
 })();
 
 function calcPrimary() {
@@ -203,4 +208,9 @@ function calcPrimary() {
   for (item of sets) sum += item.price * item.amount;
   primarySum = sum;
   for (elem of primarySumElements) elem.value = primarySum + "$";
+}
+function activeRow(row) {
+  let oldActive = table20[0].querySelector(".active_set");
+  if (oldActive) oldActive.classList.remove("active_set");
+  row.classList.add("active_set");
 }

@@ -315,7 +315,11 @@ tbody tr {
 tbody tr:hover {
   background-color: var(--accentK) !important;
 }
-select {
-  background-color: var(--accentG) !important;
+select,
+input:not(.primarySum):not(.form-control-plaintext) {
+  border: 1px solid var(--accentG) !important;
   color: var(--text) !important;
+}
+tr.active_set {
+  background-color: var(--accentK) !important;
 }
