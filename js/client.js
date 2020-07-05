@@ -1,4 +1,4 @@
-let host = "http://exam-2020-1-api.std-400.ist.mospolytech.ru";
+let host = "http://exam-2020-1-api.std-900.ist.mospolytech.ru";
 let recordsPath = "/api/data1";
 let recordsArr;
 let table20 = document.getElementById("20").getElementsByTagName("tbody");
@@ -9,6 +9,8 @@ let chosenObj;
 let primarySum = 0;
 let setsContainer = $(".sets");
 let primarySumElements = document.getElementsByClassName("primarySum");
+let optinialD = document.getElementById("dopOp");
+let totalButton = document.getElementById("openOrderModal");
 
 function sendRequest(url, method, onloadHandler, params) {
   let xhr = new XMLHttpRequest();
@@ -50,6 +52,13 @@ function fillSets() {
         fillPrices();
         calcPrimary();
         activeRow(row);
+        let inputS = optinialD.querySelector("input#socDisc");
+        let inputD = optinialD.querySelector("input#unContact");
+        if (inputD.hasAttribute("disabled")) inputD.removeAttribute("disabled");
+
+        if (inputS.hasAttribute("disabled") && chosenObj.socialPrivileges == 1)
+          inputS.removeAttribute("disabled");
+        else inputS.setAttribute("disabled", "disabled");
       })
   );
 }
@@ -214,3 +223,28 @@ function activeRow(row) {
   if (oldActive) oldActive.classList.remove("active_set");
   row.classList.add("active_set");
 }
+$("#student").on("change", function () {
+  if ($("student").attr("checked")) {
+    if (chosenObj.socicalPrivileges == 1) {
+      $("#socModal").value = chosenObj.socialDiscount + "%";
+    }
+  }
+});
+
+totalButton.onclick = function () {
+  let inputS = optinialD.querySelector("input#socDisc");
+  let inputD = optinialD.querySelector("input#unContact");
+  if (inputD.checked)
+    document.getElementById("uncontact_delivery").removeAttribute("disabled");
+  else
+    document
+      .getElementById("uncontact_delivery")
+      .setAttribute("disabled", "disabled");
+  if (inputS.checked)
+    document.getElementById("socModal").value = chosenObj.socialDiscount + "%";
+  else document.getElementById("socModal").value = "-";
+  document.getElementById("modal_info_name").innerText = chosenObj.name;
+  document.getElementById("modal_info_admArea").innerText = chosenObj.admArea;
+  document.getElementById("modal_info_district").innerText = chosenObj.district;
+  document.getElementById("modal_info_rate").innerText = chosenObj.rate;
+};

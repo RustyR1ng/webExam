@@ -17,6 +17,7 @@ window.onload = function () {
   mainBody.style.marginTop = header.offsetHeight + "px";
 };
 
+navButton.onclick = navIcon;
 function navIcon() {
   let navIconClass = "nav-icon-clicked";
   switch (navButton.getAttribute("aria-expanded")) {

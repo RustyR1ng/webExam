@@ -162,7 +162,9 @@ button {
 button:not(.navbar-toggler):not(.close):hover {
   background-color: var(--accentG);
 }
-
+button:not(.navbar-toggler):not(.close):disabled {
+  background-color: var(--text-accent);
+}
 button:not(.navbar-toggler):not(.close) {
   border-radius: 9999px;
   background-color: var(--accent);
@@ -316,10 +318,29 @@ tbody tr:hover {
   background-color: var(--accentK) !important;
 }
 select,
-input:not(.primarySum):not(.form-control-plaintext) {
+input:not(.primarySum):not(.form-control-plaintext),
+textarea {
   border: 1px solid var(--accentG) !important;
   color: var(--text) !important;
 }
 tr.active_set {
   background-color: var(--accentK) !important;
+}
+select,
+input {
+  border-radius: 9999px !important;
+}
+.modal-open,
+.modal,
+nav {
+  padding-right: 0 !important;
+}
+body.modal-open {
+  overflow: hidden !important;
+}
+.set_modal {
+  background-color: var(--accentK);
+}
+.section_header h5 {
+  color: var(--accentR);
 }

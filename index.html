@@ -31,7 +31,7 @@
     <nav class="navbar navbar-expand-xl fixed-top">
       <a class="navbar-brand" href="#">
         <svg>
-          <use x="0" y="0" xlink:href="/img/pizza-box.svg#icon" />
+          <use x="0" y="0" xlink:href="img/pizza-box.svg#icon" />
         </svg>
       </a>
       <button
@@ -524,7 +524,7 @@
           </div>
         </div>
       </div>
-      <div class="container-fluid dopOp py-4 mt-3">
+      <div id="dopOp" class="container-fluid py-4 mt-3 dopOp">
         <div class="row">
           <div class="col py-3">
             <h3 class="text-center">Доп. опции</h3>
@@ -534,14 +534,15 @@
           <div class="form-row">
             <div class="col-md-6 py-3 position-relative">
               <div class="form-check">
-                <label class="form-check-label" for="student">
+                <label class="form-check-label" for="unContact">
                   Бесконтактная доставка
                 </label>
                 <input
                   class="form-check-input mr-3"
                   type="checkbox"
                   value=""
-                  id="student"
+                  id="unContact"
+                  disabled
                 />
               </div>
             </div>
@@ -549,14 +550,15 @@
           <div class="form-row">
             <div class="col-md-6 py-3 position-relative">
               <div class="form-check">
-                <label class="form-check-label" for="fastDelivery">
+                <label class="form-check-label" for="socDisc">
                   Использовать соц. скидку
                 </label>
                 <input
                   class="form-check-input mr-3"
                   type="checkbox"
                   value=""
-                  id="fastDelivery"
+                  id="socDisc"
+                  disabled
                 />
               </div>
             </div>
@@ -575,7 +577,13 @@
               />
             </div>
             <div class="col-md text-right">
-              <button type="button" class="px-3">
+              <button
+                type="button"
+                class="px-3"
+                data-toggle="modal"
+                id="openOrderModal"
+                data-target="#orderModal"
+              >
                 Оформить заказ
               </button>
             </div>
@@ -595,5 +603,240 @@
         </footer>
       </div>
     </main>
+    <div
+      class="modal fade animateModal"
+      id="orderModal"
+      tabindex="-1"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Оформление заказа</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row section_header">
+              <div class="col"><h5>Позиции заказа</h5></div>
+            </div>
+            <section id="modalSets" class="mb-4">
+              <div class="row set_modal mb-2 py-1">
+                <div class="col">
+                  <img src="img/dish1.png" width="60" alt="" />
+                </div>
+                <div class="col set_name d-flex align-items-center">
+                  Название
+                </div>
+                <div class="col set_amount_price d-flex align-items-center">
+                  <span class="set_amount">2x</span>
+                  <span class="set_price">140$</span>
+                </div>
+                <div class="col set_total_price d-flex align-items-center">
+                  280$
+                </div>
+              </div>
+              <div class="row set_modal mb-2 py-1">
+                <div class="col">
+                  <img src="img/dish1.png" width="60" alt="" />
+                </div>
+                <div class="col set_name d-flex align-items-center">
+                  Название
+                </div>
+                <div class="col set_amount_price d-flex align-items-center">
+                  <span class="set_amount">2x</span>
+                  <span class="set_price">140$</span>
+                </div>
+                <div class="col set_total_price d-flex align-items-center">
+                  280$
+                </div>
+              </div>
+            </section>
+            <form id="totalForm">
+              <section class="modal_dop">
+                <div class="row section_header">
+                  <div class="col"><h5>Доп. опции</h5></div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-form-label pl-3">
+                    <label for="uncontact_delivery" class="m-0"
+                      >Бесконтактная доставка</label
+                    >
+                  </div>
+                  <div class="col">
+                    <select
+                      class="form-control"
+                      name="uncontact_delivery"
+                      disabled
+                      id="uncontact_delivery"
+                      ><option selected value="1">Пункт 1</option
+                      ><option value="2">Пункт 2</option>
+                      <option value="3">Пункт 3</option></select
+                    >
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-form-label pl-3">
+                    <label for="socialPrivilegesTotal" class="m-0"
+                      >Соц. скидка</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      readonly
+                      type="text"
+                      value="-"
+                      class="form-control-plaintext text-right"
+                      id="socModal"
+                    />
+                  </div>
+                </div>
+              </section>
+              <section class="modal_info">
+                <div class="row section_header">
+                  <div class="col"><h5>Информация о предприятии</h5></div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-form-label pl-3">
+                    <span class="m-0">Название</span>
+                  </div>
+                  <div
+                    class="col-md-6 ml-auto d-flex justify-content-start align-items-center"
+                  >
+                    <span id="modal_info_name"></span>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-form-label pl-3">
+                    <span class="m-0">Административный округ</span>
+                  </div>
+                  <div
+                    class="col-md-6 ml-auto d-flex justify-content-start align-items-center"
+                  >
+                    <span id="modal_info_admArea"></span>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-form-label pl-3">
+                    <span class="m-0">Район</span>
+                  </div>
+                  <div
+                    class="col-md-6 ml-auto d-flex justify-content-start align-items-center"
+                  >
+                    <span id="modal_info_district"></span>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-form-label pl-3">
+                    <span class="m-0">Рейтинг</span>
+                  </div>
+                  <div
+                    class="col-md-6 ml-auto d-flex justify-content-start align-items-center"
+                  >
+                    <span id="modal_info_rate"></span>
+                  </div>
+                </div>
+              </section>
+              <section class="modal_delivery">
+                <div class="row section_header">
+                  <div class="col"><h5>Доставка</h5></div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-form-label pl-3">
+                    <label for="zone" class="m-0">Зона доставки</label>
+                  </div>
+                  <div
+                    class="col-md-6 ml-auto d-flex justify-content-start align-items-center"
+                  >
+                    <select class="form-control" id="zone"
+                      ><option selected value="1">Первая зона</option
+                      ><option value="2">Вторая зона</option></select
+                    >
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-form-label pl-3">
+                    <label for="adressDelivery" class="m-0"
+                      >Адрес доставки</label
+                    >
+                  </div>
+                  <div
+                    class="col-md-6 ml-auto d-flex justify-content-start align-items-center"
+                  >
+                    <textarea
+                      class="form-control"
+                      id="adressDelivery"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-form-label pl-3">
+                    <label for="priceDelivery" class="m-0"
+                      >Стоимость доставки</label
+                    >
+                  </div>
+                  <div
+                    class="col-md-6 ml-auto d-flex justify-content-start align-items-center"
+                  >
+                    <input
+                      class="form-control-plaintext"
+                      id="priceDelivery"
+                      value="250$"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-form-label pl-3">
+                    <label for="clinetName" class="m-0">ФИО</label>
+                  </div>
+                  <div
+                    class="col-md-6 ml-auto d-flex justify-content-start align-items-center"
+                  >
+                    <input
+                      class="form-control"
+                      id="clinetName"
+                      placeholder="Фамилия Имя Отчество"
+                    />
+                  </div>
+                </div>
+              </section>
+              <section class="total_modal">
+                <div class="row mb-2 section_header">
+                  <div class="col-form-label pl-3">
+                    <label for="clinetName" class="m-0"><h5>Итого</h5></label>
+                  </div>
+                  <div
+                    class="col-md-6 ml-auto d-flex justify-content-start align-items-center"
+                  >
+                    <input
+                      class="form-control-plaintext primarySum"
+                      id="total_price"
+                      readonly
+                      value="0$"
+                    />
+                  </div>
+                </div>
+              </section>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="px-3" data-dismiss="modal">
+              Отмена
+            </button>
+            <button type="button" class="px-3" id="acceptTotal">
+              Подтвердить
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
