@@ -7,10 +7,11 @@ let searchForm = document.getElementById("searchBiz");
 let sets = [];
 let chosenObj;
 let primarySum = 0;
-let setsContainer = $(".sets");
+let setsContainer = $("#menu");
 let primarySumElements = document.getElementsByClassName("primarySum");
 let optinialD = document.getElementById("dopOp");
 let totalButton = document.getElementById("openOrderModal");
+let responseJSON = [];
 
 function sendRequest(url, method, onloadHandler, params) {
   let xhr = new XMLHttpRequest();
@@ -48,10 +49,13 @@ function fillSets() {
         }
 
         if (setsContainer.hasClass("d-none"))
-          setsContainer.toggleClass("d-flex d-none");
+          setsContainer.toggleClass("d-none");
         fillPrices();
         calcPrimary();
         activeRow(row);
+        let openModal = document.getElementById("openOrderModal");
+        if (openModal.hasAttribute("disabled"))
+          openModal.removeAttribute("disabled");
         let inputS = optinialD.querySelector("input#socDisc");
         let inputD = optinialD.querySelector("input#unContact");
         if (inputD.hasAttribute("disabled")) inputD.removeAttribute("disabled");
@@ -205,11 +209,11 @@ function fillCard(menuCards, cardID, responseJSON) {
 }
 
 (async () => {
-  let responseJSON = await $.getJSON("js/sets.json");
+  responseJSON = await $.getJSON("js/sets.json");
   for (let cardID = 0; cardID < menuCards.length; cardID++) {
     fillCard(menuCards, cardID, responseJSON);
   }
-  setsContainer.toggleClass("d-none d-flex");
+  setsContainer.toggleClass("d-none");
 })();
 
 function calcPrimary() {
@@ -240,11 +244,31 @@ totalButton.onclick = function () {
     document
       .getElementById("uncontact_delivery")
       .setAttribute("disabled", "disabled");
-  if (inputS.checked)
+  if (inputS.checked) {
     document.getElementById("socModal").value = chosenObj.socialDiscount + "%";
-  else document.getElementById("socModal").value = "-";
+    document.getElementById("total_price").value =
+      primarySum * chosenObj.socialDiscount * 0.01 + "$";
+  } else document.getElementById("socModal").value = "-";
+
   document.getElementById("modal_info_name").innerText = chosenObj.name;
   document.getElementById("modal_info_admArea").innerText = chosenObj.admArea;
   document.getElementById("modal_info_district").innerText = chosenObj.district;
   document.getElementById("modal_info_rate").innerText = chosenObj.rate;
+  let containerModalSets = document.getElementById("modalSets");
+  containerModalSets.innerHTML = "";
+  for (let i = 0; i < sets.length; i++) {
+    if (sets[i].amount != 0)
+      containerModalSets.innerHTML +=
+        '<div class="row set_modal d-flex flex-column flex-md-row mb-2 py-1"><div class="col d-flex justify-content-center align-items-center"><img src="' +
+        responseJSON[i].image +
+        '" width="60" alt=""/></div><div class="col set_name d-flex justify-content-center align-items-center text-center">' +
+        responseJSON[i].name +
+        '</div><div class="col set_amount_price d-flex justify-content-center align-items-center"><span class="set_amount">' +
+        sets[i].amount +
+        'x</span><span class="set_price">' +
+        sets[i].price +
+        '$</span></div><div class="col set_total_price d-flex justify-content-center align-items-center"> ' +
+        sets[i].amount * sets[i].price +
+        "$</div></div>";
+  }
 };
