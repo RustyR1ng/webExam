@@ -6,6 +6,8 @@ let api_key = "77ef80ba-04a9-46f4-bfd7-3ce1c20dc137";
 let searchForm = document.getElementById("search");
 function sendRequest(url, method, onloadHandler, params) {
   let xhr = new XMLHttpRequest();
+  url.searchParams.append("api_key", api_key);
+  let urlStr = url.toString();
   xhr.upload.onerror = onerrorHandler;
   xhr.upload.onabort = onerrorHandler;
   xhr.upload.ontimeout = onerrorHandler;
@@ -13,17 +15,13 @@ function sendRequest(url, method, onloadHandler, params) {
   xhr.onabort = onerrorHandler;
   xhr.ontimeout = onerrorHandler;
   xhr.onload = onloadHandler;
-  xhr.open(method, url);
-  url.searchParams.append("api_key", api_key);
-  /* xhr.setRequestHeader("Access-Control-Allow-Origin", "true"); */
-  /* xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.open(method, urlStr);
+  /*  xhr.setRequestHeader("Access-Control-Allow-Origin", "true");
+  xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Accept", "application/json"); */
   xhr.responseType = "json";
-  if (params) {
-    xhr.send(params);
-  } else {
-    xhr.send();
-  }
+  if (params) xhr.send(params);
+  else xhr.send();
 }
 function recordPath(id) {
   return recordsPath + "/" + id;
@@ -149,6 +147,7 @@ function renderRecord(record) {
 
   return row;
 }
+
 function renderRecords(records) {
   recordsList.innerHTML = "";
   for (record of records) {
@@ -159,7 +158,7 @@ function downloadData() {
   let url = new URL(recordsPath, host);
   sendRequest(url, "GET", function () {
     recordsArr = Array.prototype.slice.call(this.response);
-    renderRecords(recordsArr.slice(0, 5));
+    renderRecords(recordsArr);
     fillSearchSelects();
   });
 }
@@ -167,6 +166,7 @@ downloadData();
 //read
 document.getElementById("filterBtn").onclick = function () {
   let searchOptions = [];
+  let recordsSearch = recordsArr;
   searchForm.querySelectorAll("select").forEach((select) => {
     let value;
     let selected = select.options[select.selectedIndex];
@@ -177,7 +177,27 @@ document.getElementById("filterBtn").onclick = function () {
     /* url.searchParams.append(select.name, value); */
     searchOptions.push({ name: select.name, value: value });
   });
-  let recordsSearch = recordsArr;
+  let nameS = searchForm.querySelector("input[name=name]");
+  if (nameS.value) searchOptions.push({ name: nameS.name, value: nameS.value });
+  let seatsS = searchForm.querySelectorAll("input[name=seatsCount]");
+  if (seatsS[0].value)
+    recordsSearch = recordsSearch.filter((item) => {
+      return item[seatsS[0].name] >= seatsS[0].value;
+    });
+  if (seatsS[1].value)
+    recordsSearch = recordsSearch.filter((item) => {
+      return item[seatsS[1].name] <= seatsS[1].value;
+    });
+  /* let dateS = searchForm.querySelectorAll("input[name=created_at]");
+  if (dateS[0].value)
+    recordsSearch = recordsSearch.filter((item) => {
+      return item[dateS[0].name] >= new Date(dateS[0].value);
+    });
+  if (dateS[1].value)
+    recordsSearch = recordsSearch.filter((item) => {
+      return item[dateS[1].name] <= new Date(dateS[1].value);
+    }); */
+
   for (option of searchOptions) {
     recordsSearch = recordsSearch.filter((item) => {
       return item[option.name] == option.value;
@@ -193,12 +213,14 @@ document.getElementById("openCreateModal").onclick = function () {
   resetForm(form);
   document.getElementById("createBtn").onclick = function () {
     let url = new URL(recordsPath, host);
-    let params = new FormData(document.getElementById("createForm"));
+    let params = new FormData();
+    fillFormData(document.getElementById("createForm"), params);
     sendRequest(
       url,
       "POST",
       function () {
-        renderRecord(this.response);
+        recordsList.appendChild(renderRecord(this.response));
+        recordsArr.push(this.response);
       },
       params
     );
@@ -208,7 +230,7 @@ document.getElementById("openCreateModal").onclick = function () {
 function deleteBtnHandler(event) {
   let url = new URL(recordPath(event.target.dataset.recordId), host);
   sendRequest(url, "DELETE", function () {
-    document.getElementById(this.response).remove();
+    document.getElementById(this.response.id).remove();
   });
 }
 //update
@@ -227,7 +249,7 @@ function updateBtnHandler(event) {
         }
         default: {
           if (thisRecord[prop] != element.value) {
-            url.searchParams.set(prop, element.value);
+            url.searchParams.append(prop, element.value);
           }
         }
       }
@@ -255,4 +277,30 @@ function fillSearchSelects() {
         selectElem.innerHTML += "<option>" + option + "</option>";
       }
     });
+}
+function fillFormData(form, data) {
+  form.querySelectorAll("input, textarea").forEach((element) => {
+    let property = element.getAttribute("name");
+    let value;
+    switch (element.tagName) {
+      case "INPUT": {
+        let type = element.getAttribute("type");
+        switch (type) {
+          case "radio": {
+            if (!element.checked) break;
+          }
+          default: {
+            value = element.value;
+            break;
+          }
+        }
+        break;
+      }
+      case "TEXTAREA": {
+        value = element.innerText;
+        break;
+      }
+    }
+    if (value) data.append(property, value);
+  });
 }
