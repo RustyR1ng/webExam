@@ -130,7 +130,7 @@ legend {
 .changeRecordBtn::after {
   content: "\f013";
 }
-.companyList div.row:first-of-type {
+#records-header {
   background-color: var(--accent);
   color: var(--text);
   border-top-left-radius: 9999px;
@@ -138,14 +138,14 @@ legend {
 }
 
 @media (max-width: 768px) {
-  .companyList div.row:first-of-type {
+  #records-header {
     border-radius: 0;
   }
 }
 .companyList div.row {
   background-color: var(--background);
 }
-.companyList div.row:first-of-type div {
+#records-header div {
   text-align: center;
   display: flex;
   align-items: flex-end;

@@ -12,6 +12,7 @@ let primarySumElements = document.getElementsByClassName("primarySum");
 let optinialD = document.getElementById("dopOp");
 let totalButton = document.getElementById("openOrderModal");
 let responseJSON = [];
+let searchBtn = document.getElementById("searchObjects");
 
 function sendRequest(url, method, onloadHandler, params) {
   let xhr = new XMLHttpRequest();
@@ -132,8 +133,6 @@ function searchObjects() {
     renderRecords(rateFilter20(searchResponse));
   }); */
 }
-//get client
-let searchBtn = document.getElementById("searchObjects");
 searchBtn.onclick = searchObjects;
 function renderRecord(record) {
   let row = document.createElement("tr");
@@ -207,7 +206,6 @@ function fillCard(menuCards, cardID, responseJSON) {
   cardDescription.innerText = responseJSON[cardID].descripton;
   cardImage.setAttribute("src", responseJSON[cardID].image);
 }
-
 (async () => {
   responseJSON = await $.getJSON("js/sets.json");
   for (let cardID = 0; cardID < menuCards.length; cardID++) {
@@ -215,7 +213,6 @@ function fillCard(menuCards, cardID, responseJSON) {
   }
   setsContainer.toggleClass("d-none");
 })();
-
 function calcPrimary() {
   let sum = 0;
   for (item of sets) sum += item.price * item.amount;
@@ -227,28 +224,24 @@ function activeRow(row) {
   if (oldActive) oldActive.classList.remove("active_set");
   row.classList.add("active_set");
 }
-$("#student").on("change", function () {
-  if ($("student").attr("checked")) {
-    if (chosenObj.socicalPrivileges == 1) {
-      $("#socModal").value = chosenObj.socialDiscount + "%";
-    }
-  }
-});
-
 totalButton.onclick = function () {
   let inputS = optinialD.querySelector("input#socDisc");
   let inputD = optinialD.querySelector("input#unContact");
-  if (inputD.checked)
-    document.getElementById("uncontact_delivery").removeAttribute("disabled");
-  else
-    document
-      .getElementById("uncontact_delivery")
-      .setAttribute("disabled", "disabled");
+  if (inputD.checked) {
+    $("#uncontact_delivery").toggleClass("d-none", false);
+    $("#uncontact_miss").toggleClass("d-none", true);
+  } else {
+    $("#uncontact_delivery").toggleClass("d-none", true);
+    $("#uncontact_miss").toggleClass("d-none", false);
+  }
   if (inputS.checked) {
     document.getElementById("socModal").value = chosenObj.socialDiscount + "%";
     document.getElementById("total_price").value =
-      primarySum * chosenObj.socialDiscount * 0.01 + "$";
-  } else document.getElementById("socModal").value = "-";
+      primarySum - primarySum * chosenObj.socialDiscount * 0.01 + "$";
+  } else {
+    document.getElementById("socModal").value = "-";
+    document.getElementById("total_price").value = primarySum + "$";
+  }
 
   document.getElementById("modal_info_name").innerText = chosenObj.name;
   document.getElementById("modal_info_admArea").innerText = chosenObj.admArea;

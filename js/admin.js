@@ -1,9 +1,9 @@
-let host = "http://exam-2020-1-api.std-400.ist.mospolytech.ru";
+let host = "http://exam-2020-1-api.std-900.ist.mospolytech.ru";
 let recordsPath = "/api/data1";
 let recordsList = document.getElementById("records");
-let recordsRows = recordsList.getElementsByClassName("record");
 let recordsArr;
-
+let api_key = "77ef80ba-04a9-46f4-bfd7-3ce1c20dc137";
+let searchForm = document.getElementById("search");
 function sendRequest(url, method, onloadHandler, params) {
   let xhr = new XMLHttpRequest();
   xhr.upload.onerror = onerrorHandler;
@@ -14,6 +14,7 @@ function sendRequest(url, method, onloadHandler, params) {
   xhr.ontimeout = onerrorHandler;
   xhr.onload = onloadHandler;
   xhr.open(method, url);
+  url.searchParams.append("api_key", api_key);
   /* xhr.setRequestHeader("Access-Control-Allow-Origin", "true"); */
   /* xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Accept", "application/json"); */
@@ -24,11 +25,9 @@ function sendRequest(url, method, onloadHandler, params) {
     xhr.send();
   }
 }
-
 function recordPath(id) {
   return recordsPath + "/" + id;
 }
-
 function resetForm(form) {
   form
     .querySelectorAll("input:not([type='radio']), textarea")
@@ -39,7 +38,6 @@ function resetForm(form) {
     element.removeAttribute("checked");
   });
 }
-
 function fillForm(form, id) {
   let formRecord = recordsArr.find((item) => item.id == id);
   form.querySelectorAll("input, textarea").forEach((element) => {
@@ -76,107 +74,116 @@ function fillForm(form, id) {
     }
   });
 }
-
 function renderRecord(record) {
-  function renderRecordName(row, col) {
-    row.classList.add("row", "record", "py-2");
-    col.classList.add("col");
-    row.id = record.id;
-    col.innerHTML = record.name;
-    row.append(col);
-  }
-  function renderRecordTypeObject(row, col) {
-    col.classList.add("col-2", "d-none", "d-md-block");
-    col.innerHTML = record.typeObject;
-    row.append(col);
-  }
-  function renderRecordAdress(row, col) {
-    col.classList.add("col");
-    col.innerHTML = record.address;
-    row.append(col);
-  }
-  function renderRecordButtons(row, col) {
-    col.classList.add(
-      "col-3",
-      "d-flex",
-      "d-md-block",
-      "justify-content-center",
-      "align-items-center",
-      "flex-column",
-      "p-0",
-      "col-md-2",
-      "pr-md-1",
-      "p-md-2",
-      "text-md-center"
-    );
-    btn.dataset.recordId = record.id;
-    btn.classList.add(
-      "dangerBtn",
-      "deleteRecordBtn",
-      "icon",
-      "mr-md-1",
-      "mr-md-3",
-      "mb-2",
-      "mb-md-0"
-    );
-    btn.setAttribute("data-toggle", "modal");
-    btn.setAttribute("data-target", "#deleteModal");
-    btn.onclick = function () {
-      let delbtn = document.getElementById("deleteModalBtn");
-      delbtn.dataset.recordId = event.target.dataset.recordId;
-      delbtn.onclick = deleteBtnHandler;
-    };
-    col.append(btn);
-
-    btn = document.createElement("button");
-    btn.dataset.recordId = record.id;
-    btn.classList.add("changeRecordBtn", "icon");
-    btn.setAttribute("data-toggle", "modal");
-    btn.setAttribute("data-target", "#createUpdModal");
-    btn.dataset.recordId = record.id;
-    btn.onclick = function () {
-      let modal = document.getElementById("createUpdModal");
-      modal.querySelector(".modal-title").innerHTML = "Редактирование записи";
-      let updateBtn = document.getElementById("createBtn");
-      updateBtn.dataset.recordId = event.target.dataset.recordId;
-      let form = modal.querySelector("form");
-      resetForm(form);
-      fillForm(form, event.target.dataset.recordId);
-      updateBtn.onclick = updateBtnHandler;
-    };
-    col.append(btn);
-    row.append(col);
-  }
   let row = document.createElement("div");
   let col = document.createElement("div");
   let btn = document.createElement("button");
 
-  renderRecordName(row, col);
+  row.classList.add("row", "py-2");
+  col.classList.add("col");
+  row.id = record.id;
+  col.innerHTML = record.name;
+  row.append(col);
+
   col = document.createElement("div");
-  renderRecordTypeObject(row, col);
+  col.classList.add("col-2", "d-none", "d-md-block");
+  col.innerHTML = record.typeObject;
+  row.append(col);
+
   col = document.createElement("div");
-  renderRecordAdress(row, col);
+  col.classList.add("col");
+  col.innerHTML = record.address;
+  row.append(col);
+
   col = document.createElement("div");
-  renderRecordButtons(row, col);
+  col.classList.add(
+    "col-3",
+    "d-flex",
+    "d-md-block",
+    "justify-content-center",
+    "align-items-center",
+    "flex-column",
+    "p-0",
+    "col-md-2",
+    "pr-md-1",
+    "p-md-2",
+    "text-md-center"
+  );
+  btn.dataset.recordId = record.id;
+  btn.classList.add(
+    "dangerBtn",
+    "deleteRecordBtn",
+    "icon",
+    "mr-md-1",
+    "mr-md-3",
+    "mb-2",
+    "mb-md-0"
+  );
+  btn.setAttribute("data-toggle", "modal");
+  btn.setAttribute("data-target", "#deleteModal");
+  btn.onclick = function () {
+    let delbtn = document.getElementById("deleteModalBtn");
+    delbtn.dataset.recordId = event.target.dataset.recordId;
+    delbtn.onclick = deleteBtnHandler;
+  };
+  col.append(btn);
+
+  btn = document.createElement("button");
+  btn.dataset.recordId = record.id;
+  btn.classList.add("changeRecordBtn", "icon");
+  btn.setAttribute("data-toggle", "modal");
+  btn.setAttribute("data-target", "#createUpdModal");
+  btn.dataset.recordId = record.id;
+  btn.onclick = function () {
+    let modal = document.getElementById("createUpdModal");
+    modal.querySelector(".modal-title").innerHTML = "Редактирование записи";
+    let updateBtn = document.getElementById("createBtn");
+    updateBtn.dataset.recordId = event.target.dataset.recordId;
+    let form = modal.querySelector("form");
+    resetForm(form);
+    fillForm(form, event.target.dataset.recordId);
+    updateBtn.onclick = updateBtnHandler;
+  };
+  col.append(btn);
+  row.append(col);
+
   return row;
 }
-
 function renderRecords(records) {
+  recordsList.innerHTML = "";
   for (record of records) {
     recordsList.append(renderRecord(record));
   }
 }
-
-//read
-document.getElementById("filterBtn").onclick = function () {
+function downloadData() {
   let url = new URL(recordsPath, host);
   sendRequest(url, "GET", function () {
-    Array.from(recordsRows).forEach((element) => {
-      element.remove();
-    });
     recordsArr = Array.prototype.slice.call(this.response);
     renderRecords(recordsArr.slice(0, 5));
+    fillSearchSelects();
   });
+}
+downloadData();
+//read
+document.getElementById("filterBtn").onclick = function () {
+  let searchOptions = [];
+  searchForm.querySelectorAll("select").forEach((select) => {
+    let value;
+    let selected = select.options[select.selectedIndex];
+    if (selected.innerText == "Не выбрано") return;
+    if (select.name == "socialPrivileges" || select.name == "isNetObject")
+      value = selected.innerText == "Да" ? 1 : 0;
+    else value = selected.innerText;
+    /* url.searchParams.append(select.name, value); */
+    searchOptions.push({ name: select.name, value: value });
+  });
+  let recordsSearch = recordsArr;
+  for (option of searchOptions) {
+    recordsSearch = recordsSearch.filter((item) => {
+      return item[option.name] == option.value;
+    });
+  }
+  renderRecords(recordsSearch);
 };
 //create
 document.getElementById("openCreateModal").onclick = function () {
@@ -230,4 +237,22 @@ function updateBtnHandler(event) {
 }
 function onerrorHandler() {
   $("#error").toast("show");
+}
+function fillSearchSelects() {
+  searchForm
+    .querySelectorAll(
+      "select:not([name='socialPrivileges']):not([name='isNetObject']"
+    )
+    .forEach((selectElem) => {
+      let options = recordsArr
+        .map((record) => record[selectElem.name])
+        .filter(function (item, pos, arr) {
+          /* if (item && item != "Не выбрано") */ return (
+            arr.indexOf(item) == pos
+          );
+        });
+      for (option of options) {
+        selectElem.innerHTML += "<option>" + option + "</option>";
+      }
+    });
 }
